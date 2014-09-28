@@ -14,7 +14,7 @@
       tnum = 0
       tlng = 0.0
       tlat = 0.0
-      for route in $('#gpsData').val().split(';')
+      for route in $('#gpsData').val().split(/;|\n/)
         if route.length > 0
           for gps in route.split('|')
             gps = gps.split(',')
@@ -32,7 +32,7 @@
     $('#drawRoutes').click ->
       theMap.tinyMap 'modify',
         zoom: 13
-      for route in $('#gpsData').val().split(';')
+      for route in $('#gpsData').val().split(/;|\n/)
         if route.length > 0
           arr = []
           tnum = 0

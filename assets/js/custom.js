@@ -16,7 +16,7 @@
         tnum = 0;
         tlng = 0.0;
         tlat = 0.0;
-        _ref = $('#gpsData').val().split(';');
+        _ref = $('#gpsData').val().split(/;|\n/);
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           route = _ref[_i];
           if (route.length > 0) {
@@ -43,14 +43,17 @@
       });
       $('#drawRoutes').click(function() {
         var arr, gps, route, tlat, tlng, tnum, _i, _j, _len, _len1, _ref, _ref1;
-        arr = [];
-        tnum = 0;
-        tlng = 0.0;
-        tlat = 0.0;
-        _ref = $('#gpsData').val().split(';');
+        theMap.tinyMap('modify', {
+          zoom: 13
+        });
+        _ref = $('#gpsData').val().split(/;|\n/);
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           route = _ref[_i];
           if (route.length > 0) {
+            arr = [];
+            tnum = 0;
+            tlng = 0.0;
+            tlat = 0.0;
             _ref1 = route.split('|');
             for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
               gps = _ref1[_j];
@@ -60,19 +63,16 @@
               tlat += parseFloat(gps[1]);
               arr.push([gps[1], gps[0]]);
             }
+            theMap.tinyMap('modify', {
+              polyline: {
+                coords: arr,
+                color: '#000088',
+                width: 2
+              }
+            });
           }
         }
-        theMap.tinyMap('panto', [tlat / tnum, tlng / tnum]);
-        theMap.tinyMap('modify', {
-          zoom: 13
-        });
-        return theMap.tinyMap('modify', {
-          polyline: {
-            coords: arr,
-            color: '#000088',
-            width: 2
-          }
-        });
+        return theMap.tinyMap('panto', [tlat / tnum, tlng / tnum]);
       });
       return $('#clearAll').click(function() {
         return theMap.tinyMap('clear', ['polyline', 'marker']);

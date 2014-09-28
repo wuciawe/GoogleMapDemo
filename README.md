@@ -1,149 +1,31 @@
-# jQuery-tinyMap
+# Google Map Demo
 
-This plugin will helping you to create the simple or complex Google Maps on the page.
+This is a very simple demo to show trajectory with help of google map api.
 
+Open the index.html. You will get:
 
-For complete options, methods and examples (Traditional Chinese):  
-http://app.essoduke.org/tinyMap/ 
-
-Download builder:  
-http://app.essoduke.org/tinyMap/customize/
-
-## Features
-
- * Easy to configure and use.
- * Supports Marker, Text label, Polyline, Polygon, Circle, KML, Direction layers. 
- * Custom events of map or layers.
- * Dynamic change the map. 
- * MarkerClusterer support.
-
-
-## Install
-
-Include the Google Maps API v3 before jQuery tinyMap.
-```HTML
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="jquery.tinyMap.js"></script>
-```
-
-Create the HTML container.
-```html
-<div id="map"></div>
-```
-
-Setting up the container's width and height in CSS:
-
-```css
-#map{width: WIDTH; height: HEIGHT}
-```
-
+![Google Map Demo](demo.png)
 
 ## Usage
 
-Full options: http://app.essoduke.org/tinyMap/#parameters
+### Input Format
 
-```javascript
-//Setting up the map
-$('#map').tinyMap({
-    'center': {'lat': 'Lat', 'lng': 'Lng'},
-    // or 'center': 'lat, lng'
-    // or 'center': [lat, lng]
-    // or 'center': 'ADDRESS'
-    'zoom': 14,
-    // Map events binding
-    'event': {
-        'idle': function () {}
-        // OR
-        'idle': {
-            'func': function () {},
-            'once': true / false //Run once
-        }
-        ...
-        ...
-    }
-    ...
-    ...
-});
-```
+The input format is as:
 
-### Create the Markers
+    textarea = trajectory[;|\n]trajectory[;|\n]trajectory ...
+    trajectory = location|location|location ...
+    location = longitude,latitude
 
-```javascript
-$(selector).tinyMap({
-    'marker': [
-        {
-            'addr': ['Lat', 'Lng'],
-            // Or address string e.g. `1600 Pennsylvania Ave NW, Washington, DC 20500`
-            // Or {lat: 'lat', lng: 'lng'}
-            'title': 'Hello World!', // (Optional)
-            'text': 'Cogito ergo sum!', // (optional)
-            'icon': 'http://domain/icon.png' // (optional)
-            // Binding Click event
-            'event': function (event) {
-                console.log(this.text); // Marker text property.
-                console.log(event.latLng.lat()); // Mousr event
-            }
-            /* OR 
-            'event': {
-                'click': function (event) {...},
-                'mouseover': function (event) {...}
-            }
-               OR
-            'event': {
-                'click': {
-                    'func': function () {...}
-                    'once': true / false
-                },
-                'mouseover': {
-                    ...
-                }
-            }
-            */
-        }
-        ...
-        ...
-    ]
-});
-```
+Every input may contain several trajectories seperated by `'` or `\n`.
+Every trajectory contains a serials of locations, which is separated by `|`.
+Every location is composed with longitude and latitude in the form of `longitude,latitude`.
 
-## Methods
+### Buttons
 
-```javascript
-// Methods
-// e.g. Move the map center to specified location
-$(selector).tinyMap('panto', 'Address string');
-$(selector).tinyMap('panto', ['Lat', 'Lng']);
-$(selector).tinyMap('panto', {lat: 'Lat', lng: 'Lng'});
+The Points Button is to plot every gps point in the trajectories on the map. After plotting, the map will be centered to 
+the geometry center of those points.
 
-// Dynamic setting up
-$(selector).tinyMap('modify', {OPTIONS});
+The Routes Button is to plot every trajectory with a blue line on the map. After plotting the amp will be centered to the 
+last plotted trajectory's geometry center.
 
-// e.g. Disable draggable
-$(selector).tinyMap('modify', {
-    'draggable': false
-    //Resetting  zoom level
-    'zoom': 16
-});
-
-// Clear specified layers
-// Options: marker, polyline, polygon, circle, direction, kml
-$(selector).tinyMap('clear', 'marker,polyline,polygon...etc');
-// or use array
-$(selector).tinyMap('clear', ['marker', 'polyline', 'polygon'...]);
-// or clear all layers
-$(selector).tinyMap('clear'); 
-```
-
-## Using tinyMap instance
-
-```javascript
-var map = $(selector);
-var instance = map.data('tinyMap'); 
-var markers = instance._markers; // All markers on the Map.
-```
-
-## License
-
-This plugin is released under the [MIT License](http://opensource.org/licenses/MIT).
-
-
+The ClearAll Button will clean up all those plotted layers.
