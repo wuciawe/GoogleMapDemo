@@ -6,9 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Googlemapdemo : ">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Googlemapdemo</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/stylesheet.css">
+      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+      <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
+      <script src="assets/js/jquery-1.11.1.min.js"></script>
+      <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+      <script src="assets/js/bootstrap.min.js"></script>
+      <script src="assets/js/jquery.tinyMap.js"></script>
+      <script src="assets/js/custom.js"></script>
+    <title>Google Map Demo</title>
   </head>
 
   <body>
@@ -35,6 +41,33 @@
 <a name="google-map-demo" class="anchor" href="#google-map-demo"><span class="octicon octicon-link"></span></a>Google Map Demo</h3>
 
 <p>A very simple demo to plot gps trajectories on Google Maps.</p>
+
+          <div class="container">
+              <div class="row" style="padding-top: 2px">
+                  <div class="col-md-10" >
+                      <textarea class="form-control" rows="7" id="gpsData"></textarea>
+                  </div>
+                  <div class="col-md-2">
+                      <div class="row">
+                          <button type="button" class="btn btn-info col-xs-12" id="drawPoints">Points</button>
+                      </div>
+                      <br>
+                      <div class="row">
+                          <button type="button" class="btn btn-info col-xs-12" id="drawRoutes">Routes</button>
+                      </div>
+                      <br>
+                      <div class="row">
+                          <button type="button" class="btn btn-info col-xs-12" id="clearAll">ClearAll</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="container">
+              <div class="row" style="padding-top: 5px">
+                  <div class="col-md-12" id="map" style="height: 500px">
+                  </div>
+              </div>
+          </div>
       </section>
     </div>
 
