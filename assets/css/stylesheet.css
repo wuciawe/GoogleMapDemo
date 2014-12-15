@@ -421,3 +421,24 @@ Small Device Styles
   }
 
 }
+
+header{
+  background-color: #333;
+}
+
+header a{
+  color: #fff;
+}
+
+footer {
+  /*text-align: right;*/
+  background-color: #333;
+  color: #fff;
+}
+footer a{
+  color: #fff;
+}
+footer a:hover{
+  text-decoration: none;
+  color: #428bca;
+}
